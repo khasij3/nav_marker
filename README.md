@@ -3,11 +3,12 @@
 `nav_marker` is a Flutter package that enables navigation of markers on `flutter_map`
 <!-- and `Google Maps for Flutter`. -->
 
+## Previews
 <table>
-    <tr align="center">
-        <td><img src="previews\anim_preview.gif" width="500"/></td>
-        <td><img src="previews\preview1.jpg" width="500"/></td>
-        <td><img src="previews\preview2.jpg" width="500"/></td>
+    <tr>
+        <td><img width="300" src= "previews/anim_preview.gif"></td>
+        <td><img width="300" src= "previews/preview1.jpg"></td>
+        <td><img width="300" src= "previews/preview2.jpg"></td>
     </tr>
 </table>
 
