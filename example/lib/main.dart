@@ -27,27 +27,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final MapController mapController = MapController();
+  final mapController = MapController();
 
-  final LatLng initialPoint = const LatLng(51.509364, -0.128928);
+  final initialPoint = const LatLng(51.509364, -0.128928);
+
+  List<NavMarker> markers = [];
 
   final List<LatLng> points = const [
     LatLng(52.519364, -0.148928),
-    LatLng(49.239764, 0.168928),
-    LatLng(50.509364, 1.358928),
+    LatLng(49.239764, -2.218928),
+    LatLng(50.509364, 1.658928),
   ];
 
   final List<Widget> builders = const [
-    CircleAvatar(
-      backgroundImage: AssetImage('assets/images/man_portrait.jpg'),
+    ClipOval(
+      child: Image(
+        image: AssetImage('assets/images/man_portrait.jpg'),
+      ),
     ),
-    CircleAvatar(
-      backgroundImage: AssetImage('assets/images/woman_portrait.jpg'),
+    ClipOval(
+      child: Image(
+        image: AssetImage('assets/images/woman_portrait.jpg'),
+      ),
     ),
-    Icon(Icons.location_on_sharp)
+    Icon(
+      Icons.location_on_sharp,
+      color: Colors.blue,
+    ),
   ];
-
-  List<NavMarker>? markers;
 
   @override
   void initState() {
@@ -57,14 +64,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void initMarkers() {
     for (int i = 0; i < points.length; i++) {
-      markers!.add(
+      markers.add(
         NavMarker(
           navigator: true,
           navOptions: NavigatorOptions(
-            onTap: (targetPoint) => mapController.move(
-              targetPoint,
-              mapController.zoom,
-            ),
+            onTap: (targetPoint) {
+              mapController.move(
+                targetPoint,
+                mapController.zoom,
+              );
+            },
           ),
           builder: (_) => builders[i],
           point: points[i],
@@ -81,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('NavMarker Example'),
       ),
       body: FlutterMap(
+        mapController: mapController,
         options: MapOptions(
           center: initialPoint,
           zoom: 9.2,
@@ -89,7 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           ),
-          NavMarkerLayer(navMarkers: markers!.toList()),
+          NavMarkerLayer(
+            markers: markers,
+          ),
         ],
       ),
     );
