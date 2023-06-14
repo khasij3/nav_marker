@@ -68,12 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
         NavMarker(
           navigator: true,
           navOptions: NavigatorOptions(
-            onTap: (targetPoint) {
-              mapController.move(
-                targetPoint,
-                mapController.zoom,
-              );
-            },
+            onTap: (targetPoint) => mapController.move(
+              targetPoint,
+              mapController.zoom,
+            ),
           ),
           builder: (_) => builders[i],
           point: points[i],
@@ -98,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.app',
           ),
           NavMarkerLayer(
             markers: markers,

@@ -78,8 +78,7 @@ class Navigator extends StatelessWidget {
           return Transform.rotate(
             angle: -data.angle,
             child: Center(
-              child: Container(
-                color: Colors.amber.withOpacity(0.5),
+              child: SizedBox(
                 width: data.size.width,
                 height: data.size.height,
                 child: Stack(
