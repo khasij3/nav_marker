@@ -1,6 +1,6 @@
 name: nav_marker
 description: nav_marker is a Flutter package that enables navigation of markers on flutter_map
-version: 0.0.1
+version: 0.1.0
 
 homepage: https://github.com/khasij3/nav_marker
 

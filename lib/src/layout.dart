@@ -6,36 +6,40 @@ import 'package:latlong2/latlong.dart';
 
 class NavigatorLayout {
   NavigatorLayout({
-    required this.mapBounds,
-    required this.mapPos,
-    required this.mapSize,
+    required this.bounds,
+    required this.angle,
+    required this.boxPos,
+    required this.boxSize,
     required this.navSize,
     required this.targetPoint,
   });
-  final LatLngBounds mapBounds;
-  final Offset mapPos;
-  final Size mapSize;
+  final LatLngBounds bounds;
+
+  final Offset boxPos;
+  final double angle;
+  final Size boxSize;
   final double navSize;
   final LatLng targetPoint;
 
-  // Calculate position of the pilot on screen based on the target position
+  // Calculate position of the navigator on screen
+  Offset navigatorPosition() {
+    final limitX = boxSize.width - navSize;
+    final limitY = boxSize.height - navSize;
 
-  Offset navPos() {
-    final limitX = mapSize.width - navSize;
-    final limitY = mapSize.height - navSize;
+    // LatLngBounds bounds = rotateLatLngBounds();
 
     // Calculate horizontal and vertical ratio
-    final double horizontalRatio = (targetPoint.longitude - mapBounds.west) /
-        (mapBounds.east - mapBounds.west);
-    final double verticalRatio = (targetPoint.latitude - mapBounds.north) /
-        (mapBounds.south - mapBounds.north);
+    final double horizontalRatio =
+        (targetPoint.longitude - bounds.west) / (bounds.east - bounds.west);
+    final double verticalRatio =
+        (targetPoint.latitude - bounds.north) / (bounds.south - bounds.north);
 
-    // Set current position on [mapSize]
+    // Set current position on [boxSize]
     // The position is always on the edge if unbound
-    double posX = (mapSize.width * horizontalRatio) - (navSize / 2);
-    double posY = (mapSize.height * verticalRatio) - (navSize / 2);
+    double posX = (boxSize.width * horizontalRatio) - (navSize / 2);
+    double posY = (boxSize.height * verticalRatio) - (navSize / 2);
 
-    // Limited moivement of the navigator
+    // Limited movement of the navigator
     if (posX > limitX) posX = limitX;
 
     if (posX < 0) posX = 0;
@@ -49,11 +53,11 @@ class NavigatorLayout {
 
   // Calculate direction between current point and target point
   // Then return the angle in degrees
-  double navAngle() {
-    // Convert params from degrees to radians
-    // Required for the next calculation
-    final double lat1 = degToRadian(mapBounds.center.latitude);
-    final double lng1 = degToRadian(mapBounds.center.longitude);
+  double navigatorAngle() {
+    // LatLngBounds bounds = rotateLatLngBounds();
+
+    final double lat1 = degToRadian(bounds.center.latitude);
+    final double lng1 = degToRadian(bounds.center.longitude);
     final double lat2 = degToRadian(targetPoint.latitude);
     final double lng2 = degToRadian(targetPoint.longitude);
 
@@ -94,5 +98,35 @@ class NavigatorLayout {
     final safeHeight = logicalHeight - paddingTop - paddingBottom;
 
     return Size(safeWidth, safeHeight);
+  }
+
+  // Rotates a given LatLngBounds by a specified angle
+  LatLngBounds rotateLatLngBounds() {
+    LatLng center = LatLng(
+      (bounds.southWest.latitude + bounds.northEast.latitude) / 2,
+      (bounds.southWest.longitude + bounds.northEast.longitude) / 2,
+    );
+
+    LatLng southwest = rotateLatLng(bounds.southWest, center, angle);
+    LatLng northeast = rotateLatLng(bounds.northEast, center, angle);
+
+    return LatLngBounds(northeast, southwest);
+  }
+
+  // Rotates a LatLng point around a center point by a specified angle
+  LatLng rotateLatLng(LatLng point, LatLng center, double angle) {
+    double radians = angle * (3.141592653589793238 / 180.0);
+
+    double cosTheta = cos(radians);
+    double sinTheta = sin(radians);
+
+    double x = (point.longitude - center.longitude) * cosTheta -
+        (point.latitude - center.latitude) * sinTheta +
+        center.longitude;
+    double y = (point.longitude - center.longitude) * sinTheta +
+        (point.latitude - center.latitude) * cosTheta +
+        center.latitude;
+
+    return LatLng(y, x);
   }
 }

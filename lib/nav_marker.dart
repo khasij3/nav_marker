@@ -3,16 +3,15 @@ library nav_marker;
 import 'package:flutter/material.dart' hide Navigator;
 import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:nav_marker/src/models/navigator_options.dart';
-import 'package:nav_marker/src/widgets/navigator.dart';
+import 'package:nav_marker/src/options.dart';
+import 'package:nav_marker/src/navigator.dart';
 
-export 'package:nav_marker/src/models/navigator_options.dart';
+export 'package:nav_marker/src/options.dart';
 
 class NavMarker extends Marker {
   NavMarker({
     this.navigator,
     this.navOptions,
-    Key? key,
     required Widget Function(BuildContext) builder,
     required LatLng point,
     double width = 30.0,
@@ -22,7 +21,6 @@ class NavMarker extends Marker {
     Offset? rotateOrigin,
     AlignmentGeometry? rotateAlignment,
   }) : super(
-          key: key,
           point: point,
           builder: builder,
           width: width,
@@ -46,7 +44,7 @@ typedef VoidCallback = Function();
 class NavMarkerLayer extends MarkerLayer {
   const NavMarkerLayer({
     Key? key,
-    this.navMarkers = const [],
+    this.markers = const [],
     AnchorPos? anchorPos,
     bool rotate = false,
     Offset? rotateOrigin,
@@ -60,7 +58,8 @@ class NavMarkerLayer extends MarkerLayer {
         );
 
   /// Add markers as [NavMarker] is a marker that contains a navigator
-  final List<NavMarker> navMarkers;
+  @override
+  final List<NavMarker> markers;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +67,7 @@ class NavMarkerLayer extends MarkerLayer {
     final markerWidgets = <Widget>[];
 
     // Set the marker widget
-    for (final marker in navMarkers) {
+    for (final marker in markers) {
       final pxPoint = map.project(marker.point);
 
       // See if any portion of the Marker rect resides in the map bounds
@@ -122,7 +121,7 @@ class NavMarkerLayer extends MarkerLayer {
         ),
         Navigator(
           map: map,
-          navMarkers: navMarkers,
+          markers: markers,
         ),
       ],
     );
