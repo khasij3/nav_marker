@@ -6,9 +6,9 @@
 ## Previews
 <table>
     <tr>
-        <td><img src= "previews/anim_preview.gif"></td>
-        <td><img src= "previews/preview1.jpg"></td>
-        <td><img src= "previews/preview2.jpg"></td>
+        <td><img width="200" src= "previews/anim_preview.gif"></td>
+        <td><img width="200" src= "previews/preview1.jpg"></td>
+        <td><img width="200" src= "previews/preview2.jpg"></td>
     </tr>
 </table>
 
