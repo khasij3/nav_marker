@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:nav_marker/nav_marker.dart';
+import 'package:nav_marker/map_or_nav_marker.dart';
 
 void main() {
   runApp(const MyApp());

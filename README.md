@@ -1,6 +1,6 @@
 # nav_marker
 
-`nav_marker` is a Flutter package that enables navigation of markers on `flutter_map`
+`nav_marker` is a Flutter package that allows you to add navigation markers on `flutter_map`
 <!-- and `Google Maps for Flutter`. -->
 
 ## Previews
@@ -15,8 +15,8 @@
 
 ## Features
 
-- Define dynamic markers with navigator widget
-- Display a navigator directs user towards the marker position.
+- Define dynamic markers with the `NavigationOverlay` via the `MapOrNavMarkerLayer`
+- Display a navigator that directs users towards the marker position.
 - Customize the appearance of the navigator to match the marker.
 
 ## Getting started
@@ -28,19 +28,19 @@ Import the necessary packages in your Dart file:
 ```dart
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:nav_marker/nav_marker.dart';
+import 'package:nav_marker/map_or_nav_marker.dart';
 ```
 Set up your map view using FlutterMap and specify the initial map options, following the instructions provided in the [flutter_map documentation](https://docs.fleaflet.dev/#demonstration).
 
-Then add the `NavMarkerLayer` to the `children` property of `FlutterMap`
+Then add the `MapOrNavMarkerLayer` to the `children` property of `FlutterMap`
 
 ```dart
 FlutterMap(
     options: MapOptions( ... ),
     children: [
         TileLayer( ... ),
-        NavMarkerLayer(
-            navMarkers: [
+        MapOrNavMarkerLayer(
+            mapOrNavMarkers: [
                 ...
             ]
         ),
@@ -48,20 +48,20 @@ FlutterMap(
 ),
 ```
 
-> Caution: Make sure to place the `NavMarkerLayer` **below** the `TileLayer`.
+> Caution: Make sure to place the `MapOrNavMarkerLayer` **below** the `TileLayer`.
 
-The `NavMarkerLayer` consists of `NavMarker` in children property, allowing to easily add NavMarkers as follow:
+Add `MapOrNavMarker`s in `mapOrNavMarkers` property within the `MapOrNavMarkerLayer` like so
 
 ```dart
-NavMarkerLayer(
-    navMarkers: [
-        NavNarker(
-            navigator: true,
+MapOrNavMarkerLayer(
+    mapOrNavMarkers: [
+        MapOrNavMarker(
+            navMarkerEnabled: true,
             builder: (_) => builder,
             point: point,
         ),
-        NavNarker(
-            navigator: true,
+        MapOrNavMarker(
+            navMarkerEnabled: true,
             builder: (_) => builder,
             point: point,
         ),
@@ -69,14 +69,14 @@ NavMarkerLayer(
 ),
 ```
 
-> Note: If the `navigator` property is undefined or set to false, the `NavMarker` will not be displayed, similar to a regular `Marker`.
+> Note: The `navMarkerEnabled` property must be true in order for the `MapOrNavMarker` to be displayed, similar to a regular `Marker`.
 
-Furthermore, you can customize the appearance of the navigator by defining the `navOptions` property including an `onTap` function.
+Furthermore, you can customize the appearance of the Nav Marker by defining the `navMarkerSettings` property including an `onTap` function.
 
 ```dart
-NavNarker(
-    navigator: true,
-    navOptions: NavigatorOptions(
+MapOrNavMarker(
+    navMarkerEnabled: true,
+    navMarkerSettings: NavMarkerSettings(
         onTap: (targetPoint) => onTap,
         arrowColor: arrowColor,
         backgroundColor: backgroundColor,
@@ -90,7 +90,9 @@ NavNarker(
 ```
 
 ## Todo-list
-- [ ] Enhance the precision of the direction arrows.
-- [ ] Add support for map rotation in flutter_map.
 - [ ] Develop a version that supports Google Maps.
 - [ ] Develop a version that supports integration with other packages.
+
+## Big Thanks to [Bryan Cancel](https://github.com/b-cancel) for
+- Adding support for map rotation in flutter_map.
+- Enhancing the precision of the direction arrows.

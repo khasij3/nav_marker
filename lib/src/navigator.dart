@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
-import 'package:nav_marker/nav_marker.dart';
+import 'package:nav_marker/map_or_nav_marker.dart';
 import 'package:nav_marker/src/arrow_painter.dart';
 import 'package:nav_marker/src/controller.dart';
 

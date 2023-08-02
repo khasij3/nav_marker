@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:nav_marker/nav_marker.dart';
+import 'package:nav_marker/map_or_nav_marker.dart';
 
 extension FlutterMapStateExtension on FlutterMapState {
   RenderBox get renderBox => context.findRenderObject() as RenderBox;
