@@ -40,8 +40,8 @@ class NavMarkerCtrl {
 
   /// the basics bits of data we need for the math below
   final FlutterMapState mapState;
-  final NavMarker mapOrNavMarker;
-  final NavigatorOptions navMarkerOptions;
+  final MapOrNavMarker mapOrNavMarker;
+  final NavMarkerSettings navMarkerOptions;
 
   /// [mapState] getters
   Size get size => mapState.boxSize!;
@@ -52,7 +52,7 @@ class NavMarkerCtrl {
   LatLng get targetPoint => mapOrNavMarker.point;
   double get navSize => navMarkerOptions.size;
 
-  bool get navMarkerIsEnabled => mapOrNavMarker.navigator == true;
+  bool get navMarkerIsEnabled => mapOrNavMarker.navMarkerEnabled == true;
   bool get mapMarkerIsOutOfBounds => containsMarker() == false;
 
   /// doesn't care about point size

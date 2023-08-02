@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
-class NavigatorOptions {
-  const NavigatorOptions({
+class NavMarkerSettings {
+  const NavMarkerSettings({
     this.size = 75.0,
     this.arrowColor = Colors.blue,
     this.backgroundColor = Colors.blue,

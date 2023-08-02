@@ -8,10 +8,10 @@ import 'package:nav_marker/src/options.dart';
 
 export 'package:nav_marker/src/options.dart';
 
-class NavMarker extends Marker {
-  NavMarker({
-    this.navigator,
-    this.navOptions,
+class MapOrNavMarker extends Marker {
+  MapOrNavMarker({
+    this.navMarkerEnabled = false,
+    this.navMarkerSettings,
     required Widget Function(BuildContext) builder,
     required LatLng point,
     double width = 30.0,
@@ -32,15 +32,15 @@ class NavMarker extends Marker {
         );
 
   /// Set [true] to enable navigator of marker
-  /// Display the [Navigator] pointing towards the target position
-  final bool? navigator;
+  /// Display the [NavigationOverlay] pointing towards the target position
+  final bool navMarkerEnabled;
 
-  /// To customize the style and display format of the [Navigator]
-  final NavigatorOptions? navOptions;
+  /// To customize the style and display format of the [NavigationOverlay]
+  final NavMarkerSettings? navMarkerSettings;
 }
 
-class NavMarkerLayer extends MarkerLayer {
-  const NavMarkerLayer({
+class MapOrNavMarkerLayer extends MarkerLayer {
+  const MapOrNavMarkerLayer({
     Key? key,
     this.mapOrNavMarkers = const [],
     AnchorPos? anchorPos,
@@ -55,8 +55,8 @@ class NavMarkerLayer extends MarkerLayer {
           rotateAlignment: rotateAlignment,
         );
 
-  /// Add markers as [NavMarker] is a marker that contains a navigator
-  final List<NavMarker> mapOrNavMarkers;
+  /// Add markers as [MapOrNavMarker] is a marker that contains a navigator
+  final List<MapOrNavMarker> mapOrNavMarkers;
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +116,7 @@ class NavMarkerLayer extends MarkerLayer {
         Stack(
           children: markerWidgets,
         ),
-        Navigator(
+        NavigationOverlay(
           mapState: map,
           mapOrNavMarkers: mapOrNavMarkers,
         ),

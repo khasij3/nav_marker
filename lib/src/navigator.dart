@@ -4,15 +4,15 @@ import 'package:nav_marker/nav_marker.dart';
 import 'package:nav_marker/src/arrow_painter.dart';
 import 'package:nav_marker/src/controller.dart';
 
-class Navigator extends StatelessWidget {
-  const Navigator({
+class NavigationOverlay extends StatelessWidget {
+  const NavigationOverlay({
     Key? key,
     required this.mapState,
     required this.mapOrNavMarkers,
   }) : super(key: key);
 
   final FlutterMapState mapState;
-  final List<NavMarker> mapOrNavMarkers;
+  final List<MapOrNavMarker> mapOrNavMarkers;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class MapOrNavMarkers extends StatelessWidget {
     required this.mapState,
   });
 
-  final List<NavMarker> mapOrNavMarkers;
+  final List<MapOrNavMarker> mapOrNavMarkers;
   final FlutterMapState mapState;
 
   @override
@@ -60,9 +60,9 @@ class MapOrNavMarkers extends StatelessWidget {
         mapOrNavMarkers.length,
         (index) {
           /// all the variables used to generate this marker on screen
-          NavMarker mapOrNavMarker = mapOrNavMarkers[index];
-          NavigatorOptions navMarkerOptions =
-              mapOrNavMarker.navOptions ?? const NavigatorOptions();
+          MapOrNavMarker mapOrNavMarker = mapOrNavMarkers[index];
+          NavMarkerSettings navMarkerOptions =
+              mapOrNavMarker.navMarkerSettings ?? const NavMarkerSettings();
           return NavMarkerWidget(
             ctrl: NavMarkerCtrl(
               mapState: mapState,
