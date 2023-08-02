@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
             userAgentPackageName: 'com.example.app',
           ),
           NavMarkerLayer(
-            markers: markers,
+            mapOrNavMarkers: markers,
           ),
         ],
       ),

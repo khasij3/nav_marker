@@ -3,8 +3,8 @@ library nav_marker;
 import 'package:flutter/material.dart' hide Navigator;
 import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:nav_marker/src/options.dart';
 import 'package:nav_marker/src/navigator.dart';
+import 'package:nav_marker/src/options.dart';
 
 export 'package:nav_marker/src/options.dart';
 
@@ -39,12 +39,10 @@ class NavMarker extends Marker {
   final NavigatorOptions? navOptions;
 }
 
-typedef VoidCallback = Function();
-
 class NavMarkerLayer extends MarkerLayer {
   const NavMarkerLayer({
     Key? key,
-    this.markers = const [],
+    this.mapOrNavMarkers = const [],
     AnchorPos? anchorPos,
     bool rotate = false,
     Offset? rotateOrigin,
@@ -58,8 +56,7 @@ class NavMarkerLayer extends MarkerLayer {
         );
 
   /// Add markers as [NavMarker] is a marker that contains a navigator
-  @override
-  final List<NavMarker> markers;
+  final List<NavMarker> mapOrNavMarkers;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +64,7 @@ class NavMarkerLayer extends MarkerLayer {
     final markerWidgets = <Widget>[];
 
     // Set the marker widget
-    for (final marker in markers) {
+    for (final marker in mapOrNavMarkers) {
       final pxPoint = map.project(marker.point);
 
       // See if any portion of the Marker rect resides in the map bounds
@@ -120,8 +117,8 @@ class NavMarkerLayer extends MarkerLayer {
           children: markerWidgets,
         ),
         Navigator(
-          map: map,
-          markers: markers,
+          mapState: map,
+          mapOrNavMarkers: mapOrNavMarkers,
         ),
       ],
     );
