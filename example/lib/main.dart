@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:nav_marker/nav_marker.dart';
+import 'package:nav_marker/map_or_nav_marker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final initialPoint = const LatLng(51.509364, -0.128928);
 
-  List<NavMarker> markers = [];
+  List<MapOrNavMarker> markers = [];
 
   final List<LatLng> points = const [
     LatLng(52.519364, -0.148928),
@@ -65,9 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void initMarkers() {
     for (int i = 0; i < points.length; i++) {
       markers.add(
-        NavMarker(
-          navigator: true,
-          navOptions: NavigatorOptions(
+        MapOrNavMarker(
+          navMarkerEnabled: true,
+          navMarkerSettings: NavMarkerSettings(
             onTap: (targetPoint) => mapController.move(
               targetPoint,
               mapController.zoom,
@@ -98,8 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.app',
           ),
-          NavMarkerLayer(
-            markers: markers,
+          MapOrNavMarkerLayer(
+            mapOrNavMarkers: markers,
           ),
         ],
       ),
