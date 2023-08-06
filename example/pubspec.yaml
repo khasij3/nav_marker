@@ -13,8 +13,8 @@ dependencies:
   nav_marker:
     path: ../
 
-  flutter_map: ^5.0.0
-  latlong2: ^0.9.0
+  flutter_map: any
+  latlong2: any
   
 
 dev_dependencies:

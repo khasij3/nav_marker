@@ -93,6 +93,6 @@ MapOrNavMarker(
 - [ ] Develop a version that supports Google Maps.
 - [ ] Develop a version that supports integration with other packages.
 
-## Big Thanks to [Bryan Cancel](https://github.com/b-cancel) for
+## Special Thanks to [Bryan Cancel](https://github.com/b-cancel) for
 - Adding support for map rotation in flutter_map.
 - Enhancing the precision of the direction arrows.
