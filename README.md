@@ -6,9 +6,9 @@
 ## Previews
 <table>
     <tr>
-        <td><img width="200" src= "previews/anim_preview.gif"></td>
-        <td><img width="200" src= "previews/preview1.jpg"></td>
-        <td><img width="200" src= "previews/preview2.jpg"></td>
+        <td><img width="200" src= "https://github.com/khasij3/nav_marker/blob/main/previews/anim_preview.gif?raw=true"></td>
+        <td><img width="200" src= "https://github.com/khasij3/nav_marker/blob/main/previews/preview1.jpg?raw=true"></td>
+        <td><img width="200" src= "https://github.com/khasij3/nav_marker/blob/main/previews/preview2.jpg?raw=true"></td>
     </tr>
 </table>
 
