@@ -1,4 +1,4 @@
-## 0.2.0
+## 0.1.1
 
 * Fixed displaying the navigator while rotate map issue.
 * Fixed by [Bryan Cancel](https://github.com/b-cancel)
