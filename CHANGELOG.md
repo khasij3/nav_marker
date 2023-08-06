@@ -1,7 +1,11 @@
-## 0.1.1
+## 0.1.2
 
 * Fixed displaying the navigator while rotate map issue.
 * Fixed by [Bryan Cancel](https://github.com/b-cancel)
+
+## 0.1.1
+
+* Fixed Unclosed instance of 'Sink'
 
 ## 0.1.0
 
